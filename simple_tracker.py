@@ -90,9 +90,10 @@ class AmazonAPI:
         result_list = self.driver.find_elements_by_class_name('s-result-list')
         links = []
         try:
-            results = result_list[0].find_elements_by_xpath(
-                "//div/span/div/div/div[2]/div[2]/div/div[1]/div/div/div[1]/h2/a")
+            results = result_list[0].find_elements_by_xpath("//div/span/div/div/div[2]/div[2]/div/div/div[1]/h2/a")
+                # "//div/span/div/div/div[2]/div[2]/div/div[1]/div/div/div[1]/h2/a")
             links = [link.get_attribute('href') for link in results]
+            # print(links)
             return links
         except Exception as e:
             print("Didn't get any products...")
@@ -189,6 +190,8 @@ class AmazonAPI:
 
 
 if __name__ == '__main__':
+    # print("HEY!!!")
     am = AmazonAPI(NAME, FILTERS, BASE_URL, CURRENCY)
     data = am.run()
+    print(data)
     GenerateReport(NAME, FILTERS, BASE_URL, CURRENCY, data)
